@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const navLink = [
   {
@@ -21,21 +25,33 @@ const navLink = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const path = ["/sign-in", "/register"];
+  const isHidden = path.includes(pathname);
   return (
-    <header className="sticky z-10 backdrop-blur-lg top-0 flex items-center justify-between w-full px-8 py-3 border-b">
-      <h1 className="font-mono font-bold text-2xl">Aureus</h1>
-      <nav className="text-secondary40 flex gap-4">
+    <header
+      className={cn(
+        "fixed z-10 bg-white top-0 flex items-center justify-between w-full px-8 py-3 border-b",
+        isHidden && "hidden",
+      )}
+    >
+      <h1 className="font-mono font-bold text-2xl tracking-tight">AUREUS</h1>
+      <nav className="text-secondary40 font-medium flex gap-4">
         {navLink.map((nav) => (
-          <Link href={nav.href} key={nav.title}>
+          <Link href={nav.href} key={nav.title} className="hover:underline">
             {nav.title}
           </Link>
         ))}
       </nav>
       <div className="space-x-4">
-        <Button variant="outline" className="font-semibold">
-          SIGN IN
-        </Button>
-        <Button className="font-semibold">REGISTER</Button>
+        <Link href="/sign-in">
+          <Button variant="outline" className="font-semibold">
+            SIGN IN
+          </Button>
+        </Link>
+        <Link href="/register">
+          <Button className="font-semibold">REGISTER</Button>
+        </Link>
       </div>
     </header>
   );

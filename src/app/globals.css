@@ -134,9 +134,9 @@
 }
 
 .page {
-  @apply w-full h-screen pl-8 mt-8;
+  @apply w-full pl-8;
 }
 
 .container_section {
-  @apply w-full h-full flex items-center justify-between;
+  @apply w-full h-screen flex items-center justify-between;
 }

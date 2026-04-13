@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col scroll-smooth">
         <AppShell>{children}</AppShell>
       </body>
     </html>

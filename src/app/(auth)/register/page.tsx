@@ -1,4 +1,4 @@
-import Page from "@/modules/landing";
+import Page from "@/modules/auth/register";
 
 export default function Component() {
   return <Page />;

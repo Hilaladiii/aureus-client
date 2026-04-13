@@ -14,21 +14,29 @@ export default function Hero() {
 function WordSection() {
   return (
     <div className="w-1/2 space-y-6">
-      <h1 className="text-xl xl:text-7xl font-bold font-mono ">
-        Realtime Precission Bidding
+      <div className="inline-flex items-center gap-3 mb-8 px-3 py-1.5 border border-foreground/10 bg-foreground/5 rounded-none">
+        <div className="w-2 h-2 bg-foreground" />
+        <span className="text-xs font-mono font-semibold tracking-widest text-foreground/80 uppercase">
+          AUREUS // CORE_ENGINE
+        </span>
+      </div>
+      <h1 className="text-xl xl:text-7xl font-bold font-mono tracking-tight leading-[1.05] text-foreground uppercase">
+        Realtime <br /> Precission Bidding.
       </h1>
-      <p className="text-secondary40 font-light text-lg">
+      <p className="text-secondary40 pr-32 font-light text-lg leading-relaxed">
         Our high frequency architecture eleminate delay, ensuring every bid is
         accourated for with absolute mechanical accuracy.
       </p>
-      <Button size="lg">EXPLORE LIVE AUCTIONS</Button>
+      <Button size="lg" className="tracking-wide font-semibold">
+        EXPLORE LIVE AUCTIONS
+      </Button>
     </div>
   );
 }
 
 function TopAuction() {
   return (
-    <div className="relative w-1/2 h-125 overflow-clip">
+    <div className="relative w-1/2 h-screen overflow-clip">
       <Image
         src={LandingImg}
         alt="landing"
@@ -36,7 +44,7 @@ function TopAuction() {
         fill
         className="object-cover object-center"
       />
-      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
 
       <div className="absolute bottom-10 left-10 text-white flex flex-col">
         <span className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
