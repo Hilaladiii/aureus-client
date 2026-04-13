@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const navLink = [
   {
     title: "LIVE_LOTS",
-    href: "/",
+    href: "/live-auctions",
   },
   {
     title: "UPCOMING",
@@ -36,7 +36,7 @@ export default function Header() {
       )}
     >
       <h1 className="font-mono font-bold text-2xl tracking-tight">AUREUS</h1>
-      <nav className="text-secondary40 font-medium flex gap-4">
+      <nav className="text-secondary40 text-sm font-medium flex gap-4">
         {navLink.map((nav) => (
           <Link href={nav.href} key={nav.title} className="hover:underline">
             {nav.title}

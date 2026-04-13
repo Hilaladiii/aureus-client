@@ -15,6 +15,12 @@ interface Props {
 export default function FormRegister({ onSubmit }: Props) {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      role: "BIDDER",
+    },
   });
   return (
     <FormLayout
@@ -65,7 +71,11 @@ export default function FormRegister({ onSubmit }: Props) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>ACCOUNT ROLE</FieldLabel>
-              <RadioGroup className="flex gap-5" {...field}>
+              <RadioGroup
+                className="flex gap-5"
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <div className="flex items-center gap-3">
                   <RadioGroupItem value="BIDDER" id="BIDDER" />
                   <Label htmlFor="BIDDER" className="text-xs">
@@ -102,7 +112,7 @@ export default function FormRegister({ onSubmit }: Props) {
           )}
         />
         <Button className="w-full font-mono mt-10" size="lg">
-          AUTHENTICATE ACCOUNT
+          CREATE ACCOUNT
         </Button>
       </form>
     </FormLayout>

@@ -1,8 +1,20 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const path = ["/sign-in", "/register"];
+  const isHidden = path.includes(pathname);
   return (
-    <footer className="w-full mt-20 bg-white border-t px-8 pt-16 pb-6 flex flex-col">
+    <footer
+      className={cn(
+        "w-full mt-20 bg-white border-t px-8 pt-16 pb-6 flex flex-col",
+        isHidden && "hidden",
+      )}
+    >
       <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
         <div className="max-w-sm">
           <h2 className="font-mono font-bold text-3xl tracking-tight mb-4 text-black">

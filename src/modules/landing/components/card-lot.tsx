@@ -3,12 +3,12 @@ import LandingImg from "@/assets/landing.jpg";
 
 export default function CardLot() {
   return (
-    <div className="w-full max-w-67">
+    <div className="w-fit">
       <div className="w-67 h-73 relative overflow-clip mb-2">
         <Image
           src={LandingImg}
           fill
-          className="object-cover object-center"
+          className="object-cover object-center hover:scale-110 transition-transform duration-500 ease-in-out"
           alt="test"
         />
       </div>
