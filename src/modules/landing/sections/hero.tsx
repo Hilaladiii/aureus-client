@@ -4,7 +4,7 @@ import LandingImg from "@/assets/landing.jpg";
 
 export default function Hero() {
   return (
-    <div className="container_section">
+    <div className="container_section pl-8">
       <WordSection />
       <TopAuction />
     </div>
@@ -51,12 +51,12 @@ function TopAuction() {
           Top Auction
         </span>
 
-        <h3 className="mb-1 text-2xl font-medium tracking-tight">
+        <h3 className="mb-1 font-mono text-2xl font-medium tracking-tight">
           Mclaren 720s
         </h3>
 
         <div className="flex items-end gap-4">
-          <p className="font-mono text-3xl font-semibold">$8,200.00</p>
+          <p className="text-3xl font-semibold">$800,000.00</p>
           <span className="mb-1 text-sm font-bold tracking-widest text-red-500">
             01:15:08
           </span>

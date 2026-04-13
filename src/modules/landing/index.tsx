@@ -1,9 +1,13 @@
 import Hero from "./sections/hero";
+import KeyValues from "./sections/key-values";
+import LiveLots from "./sections/live-lots";
 
 export default function Page() {
   return (
-    <div className="page">
+    <div>
       <Hero />
+      <KeyValues />
+      <LiveLots />
     </div>
   );
 }

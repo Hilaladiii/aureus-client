@@ -1,3 +1,4 @@
+import Footer from "../fragments/footer";
 import Header from "../fragments/header";
 
 interface Props {
@@ -9,6 +10,7 @@ export default function AppShell({ children }: Props) {
     <>
       <Header />
       {children}
+      <Footer />
     </>
   );
 }
