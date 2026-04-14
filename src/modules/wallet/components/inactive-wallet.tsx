@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export default function InactiveWallet() {
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="max-w-xl w-full flex flex-col items-start border-l-1 border-foreground/20 pl-8 md:pl-12 py-4">
+      <div className="max-w-xl w-full flex flex-col items-start border-l border-foreground/20 pl-8 md:pl-12 py-4">
         <h1 className="text-4xl md:text-6xl font-bold font-mono tracking-tight text-foreground leading-[1.05] mb-6">
           WALLET <br /> INACTIVE.
         </h1>

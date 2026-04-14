@@ -1,4 +1,4 @@
-import Page from "@/modules/my-auction";
+import Page from "@/modules/my-auction/create/index";
 
 export default function Component() {
   return <Page />;
