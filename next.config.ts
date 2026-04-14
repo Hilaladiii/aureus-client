@@ -1,3 +1,4 @@
+import { env } from "@/lib/env";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -5,6 +6,15 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     serverSourceMaps: false,
+  },
+  typedRoutes: true,
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: env.NEXT_PUBLIC_BASE_API_URL,
+      },
+    ];
   },
 };
 

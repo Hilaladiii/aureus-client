@@ -1,11 +1,7 @@
-import { env } from "./env";
-
 interface IFetch extends Omit<RequestInit, "body"> {
   url: string;
   body?: Record<string, any> | FormData;
 }
-
-const BASE_URL = env.NEXT_PUBLIC_BASE_API_URL;
 
 export async function appFetch<T>({
   url,
@@ -31,7 +27,7 @@ export async function appFetch<T>({
     fetchOptions.body = isFormData ? (body as FormData) : JSON.stringify(body);
   }
 
-  const response = await fetch(`${BASE_URL}/${url}`, fetchOptions);
+  const response = await fetch(`/api/${url}`, fetchOptions);
 
   if (!response.ok) {
     const errorData = await response.json();

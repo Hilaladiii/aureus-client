@@ -24,3 +24,8 @@ export async function register(
 
   return data;
 }
+
+export async function signOut(url: string) {
+  const data = await appFetch<TResponseData<null>>({ url, method: "POST" });
+  return data;
+}

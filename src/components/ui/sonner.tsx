@@ -54,7 +54,8 @@ interface Props {
   options?: ExternalToast;
 }
 function Toast({ message, type, options }: Props) {
-  const baseStyle = "font-mono flex gap-2 items-center";
+  const baseStyle =
+    "font-mono flex gap-2 items-center border border-secondary40 py-3 px-5";
   if (type === "success")
     return toast.success(message, {
       className: cn(baseStyle),
@@ -64,7 +65,7 @@ function Toast({ message, type, options }: Props) {
 
   if (type === "error")
     return toast.error(message, {
-      className: cn(baseStyle),
+      className: cn(baseStyle, "text-tertiary"),
       unstyled: true,
       ...options,
     });

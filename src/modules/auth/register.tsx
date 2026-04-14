@@ -5,9 +5,13 @@ import FormRegister from "./components/form-register";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
 import { Toast } from "@/components/ui/sonner";
+import { SWR_KEY } from "@/constants/swr-key";
 
 export default function Page() {
-  const { trigger, isMutating } = useSWRMutation("users/register", register);
+  const { trigger, isMutating } = useSWRMutation(
+    SWR_KEY.USER.REGISTER,
+    register,
+  );
   const { push } = useRouter();
   return (
     <div className="flex items-center justify-center h-screen">
