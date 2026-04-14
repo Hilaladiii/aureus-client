@@ -30,15 +30,17 @@ export default function Footer() {
             <span className="font-mono text-xs font-bold text-black tracking-[0.2em] uppercase mb-2">
               Index
             </span>
-            {["Live_Lots", "Upcoming", "Past_Sales", "Journal"].map((item) => (
-              <Link
-                key={item}
-                href="/"
-                className="text-secondary40 text-sm font-medium hover:text-black hover:underline uppercase"
-              >
-                {item}
-              </Link>
-            ))}
+            {["Live_Auctions", "Upcoming", "Past_Sales", "Journal"].map(
+              (item) => (
+                <Link
+                  key={item}
+                  href="/"
+                  className="text-secondary40 text-sm font-medium hover:text-black hover:underline uppercase"
+                >
+                  {item}
+                </Link>
+              ),
+            )}
           </div>
 
           <div className="flex flex-col space-y-3">

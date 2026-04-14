@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 const navLink = [
   {
-    title: "LIVE_LOTS",
+    title: "LIVE_AUCTIONS",
     href: "/live-auctions",
   },
   {

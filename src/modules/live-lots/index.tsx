@@ -1,24 +1,15 @@
 import { Button } from "@/components/ui/button";
 import CardLot from "../landing/components/card-lot";
+import PageLayout from "@/components/layouts/page-layout";
 
 export default function Page() {
   return (
-    <div className="mt-25 px-8">
-      <div className="flex justify-between items-end">
-        <div className="w-1/3">
-          <h1 className="font-mono font-bold text-5xl tracking-tight">
-            LIVE AUCTIONS
-          </h1>
-          <p className="text-sm text-secondary40">
-            Curated architectural fragments, brutalist artifacts, and modernist
-            blueprints. Verifiable provenance for the digital age.
-          </p>
-        </div>
-        <div>
-          <Button variant="outline">SORT BY NEWEST</Button>
-        </div>
-      </div>
-
+    <PageLayout
+      title="LIVE AUCTIONS"
+      description="Curated architectural fragments, brutalist artifacts, and modernist
+            blueprints. Verifiable provenance for the digital age."
+      action={<Button variant="outline">SORT BY NEWEST</Button>}
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 mt-10">
         <CardLot />
         <CardLot />
@@ -36,6 +27,6 @@ export default function Page() {
           LOAD REMAINING CATALOG
         </Button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
