@@ -22,6 +22,10 @@ const navLink = [
     title: "BLOG",
     href: "/",
   },
+  {
+    title: "WALLET",
+    href: "/wallet",
+  },
 ];
 
 export default function Header() {
