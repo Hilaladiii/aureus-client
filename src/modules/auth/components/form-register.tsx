@@ -10,9 +10,10 @@ import { Label } from "@/components/ui/label";
 
 interface Props {
   onSubmit: (payload: RegisterForm) => void;
+  isLoading: boolean;
 }
 
-export default function FormRegister({ onSubmit }: Props) {
+export default function FormRegister({ onSubmit, isLoading }: Props) {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -112,7 +113,7 @@ export default function FormRegister({ onSubmit }: Props) {
           )}
         />
         <Button className="w-full font-mono mt-10" size="lg">
-          CREATE ACCOUNT
+          {isLoading ? "LOADING..." : "CREATE ACCOUNT"}
         </Button>
       </form>
     </FormLayout>

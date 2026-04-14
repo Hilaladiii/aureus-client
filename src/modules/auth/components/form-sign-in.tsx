@@ -8,11 +8,16 @@ import { Button } from "@/components/ui/button";
 
 interface Props {
   onSubmit: (payload: SignInForm) => void;
+  isLoading: boolean;
 }
 
-export default function FormSignIn({ onSubmit }: Props) {
+export default function FormSignIn({ onSubmit, isLoading }: Props) {
   const form = useForm<SignInForm>({
     resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   return (
     <FormLayout
@@ -59,7 +64,7 @@ export default function FormSignIn({ onSubmit }: Props) {
           )}
         />
         <Button className="w-full font-mono mt-10" size="lg">
-          AUTHENTICATE ACCOUNT
+          {isLoading ? "LOADING..." : "AUTHENTICATE ACCOUNT"}
         </Button>
       </form>
     </FormLayout>
