@@ -1,0 +1,27 @@
+import { appFetch } from "@/common/lib/fetch";
+import { TResponseData } from "@/common/types/response";
+import { AuctionForm } from "@/modules/my-auction/create/schema";
+
+export async function createAuction(
+  url: string,
+  { arg }: { arg: AuctionForm },
+) {
+  const formData = new FormData();
+  formData.append("name", arg.name);
+  formData.append("description", arg.description);
+  formData.append("categoryId", arg.categoryId);
+  formData.append("startPrice", String(arg.startPrice));
+  formData.append("bidIncrement", String(arg.bidIncrement));
+  formData.append("startTime", new Date(arg.startTime).toISOString());
+  formData.append("endTime", new Date(arg.endTime).toISOString());
+
+  arg.images.map((img) => formData.append("images", img));
+
+  const data = await appFetch<TResponseData<null>>({
+    url,
+    body: formData,
+    method: "POST",
+  });
+
+  return data;
+}

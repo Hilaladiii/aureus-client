@@ -7,4 +7,11 @@ export const SWR_KEY = {
     REGISTER: "users/register",
     ME: "users/me",
   },
+  CATEGORY: {
+    GET_ALL: "categories",
+  },
+  AUCTION: {
+    CREATE: "auctions",
+    MY_AUCTIONS: "auctions/:id",
+  },
 };

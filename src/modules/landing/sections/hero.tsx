@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/common/components/ui/button";
 import Image from "next/image";
 import LandingImg from "@/assets/landing.jpg";
 

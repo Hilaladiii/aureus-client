@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/common/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/common/components/ui/field";
+import { Input } from "@/common/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -8,23 +8,55 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Controller, FieldValues, UseFormReturn } from "react-hook-form";
+} from "@/common/components/ui/select";
+import { Textarea } from "@/common/components/ui/textarea";
+import { Controller, Resolver } from "react-hook-form";
 import FormSectionLayout from "./form-section-layout";
 import ImageDropzone from "./image-dropzone";
+import { useForm } from "react-hook-form";
+import { AuctionForm, auctionSchema } from "../schema/index";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SWR_KEY } from "@/common/constants/swr-key";
+import { getCategories } from "@/services/category";
+import { useOptions } from "@/common/hooks/use-options";
+import { TCategory } from "@/services/category/type";
+import { useDebounceState } from "@/common/hooks/use-debounce-state";
 
 interface Props {
-  form: UseFormReturn<FieldValues, any, FieldValues>;
-  onSubmit: () => void;
+  onSubmit: (data: AuctionForm) => void;
 }
 
-export default function FormCreateAuction({ form, onSubmit }: Props) {
+export default function FormCreateAuction({ onSubmit }: Props) {
+  const [categorySearch, setCategorySearch] = useDebounceState<string>();
+
+  const { options, isLoading } = useOptions<TCategory>({
+    keyFetch: SWR_KEY.CATEGORY.GET_ALL,
+    fetcher: getCategories,
+    params: {
+      search: categorySearch,
+    },
+    labelKey: "name",
+    valueKey: "id",
+  });
+
+  const form = useForm<AuctionForm>({
+    resolver: zodResolver(auctionSchema) as unknown as Resolver<AuctionForm>,
+    defaultValues: {
+      name: "",
+      description: "",
+      startTime: "",
+      endTime: "",
+      bidIncrement: 0,
+      startPrice: 0,
+      categoryId: "",
+      images: undefined,
+    },
+  });
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full mt-10">
       <FormSectionLayout title="01. ASSET INFORMATION">
         <Controller
-          name="title"
+          name="name"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
@@ -41,20 +73,26 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
           )}
         />
         <Controller
-          name="category"
+          name="categoryId"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>CATEGORY</FieldLabel>
-              <Select>
+              <Select {...field} onValueChange={field.onChange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Theme" />
                 </SelectTrigger>
                 <SelectContent>
+                  <Input
+                    placeholder="SEARCH"
+                    onChange={(e) => setCategorySearch(e.target.value)}
+                  />
                   <SelectGroup>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {options.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -82,7 +120,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
       </FormSectionLayout>
       <FormSectionLayout title="02. VISUAL DOCUMENTATION">
         <Controller
-          name="file"
+          name="images"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
@@ -95,7 +133,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
       <FormSectionLayout title="03. FINANCIAL PARAMETERS">
         <div className="grid grid-cols-2 gap-5">
           <Controller
-            name="file"
+            name="startPrice"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
@@ -105,6 +143,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
                   id={field.name}
                   aria-invalid={fieldState.invalid}
                   placeholder="$0.0"
+                  type="number"
                   autoComplete="off"
                 />
                 {fieldState.invalid && (
@@ -114,7 +153,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
             )}
           />
           <Controller
-            name="file"
+            name="bidIncrement"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
@@ -127,6 +166,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
                   aria-invalid={fieldState.invalid}
                   placeholder="$0.0"
                   autoComplete="off"
+                  type="number"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -139,7 +179,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
       <FormSectionLayout title="04. EVENT SCHEDULING">
         <div className="grid grid-cols-2 gap-5">
           <Controller
-            name="file"
+            name="startTime"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
@@ -160,7 +200,7 @@ export default function FormCreateAuction({ form, onSubmit }: Props) {
             )}
           />
           <Controller
-            name="file"
+            name="endTime"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>

@@ -1,5 +1,8 @@
+import { TRequestParams } from "../types/request";
+
 interface IFetch extends Omit<RequestInit, "body"> {
   url: string;
+  params?: TRequestParams;
   body?: Record<string, any> | FormData;
 }
 
@@ -7,6 +10,7 @@ export async function appFetch<T>({
   url,
   body,
   method = "GET",
+  params,
   ...options
 }: IFetch): Promise<T> {
   const isFormData = body instanceof FormData;
@@ -27,7 +31,24 @@ export async function appFetch<T>({
     fetchOptions.body = isFormData ? (body as FormData) : JSON.stringify(body);
   }
 
-  const response = await fetch(`/api/${url}`, fetchOptions);
+  let finalUrl = `/api/${url}`;
+
+  if (params) {
+    const cleanParams: Record<string, string> = {};
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
+        cleanParams[key] = String(value);
+      }
+    });
+
+    const queryString = new URLSearchParams(cleanParams).toString();
+
+    if (queryString) {
+      finalUrl = `${finalUrl}?${queryString}`;
+    }
+  }
+
+  const response = await fetch(finalUrl, fetchOptions);
 
   if (!response.ok) {
     const errorData = await response.json();

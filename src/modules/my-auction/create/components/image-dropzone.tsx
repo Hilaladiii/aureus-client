@@ -2,7 +2,7 @@
 
 import { ChangeEvent, forwardRef } from "react";
 import { FileUpIcon, XIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 interface ImageDropzoneProps {
   value?: File[];

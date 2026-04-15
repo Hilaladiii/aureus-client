@@ -4,8 +4,8 @@ import { register } from "@/services/auth";
 import FormRegister from "./components/form-register";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
-import { Toast } from "@/components/ui/sonner";
-import { SWR_KEY } from "@/constants/swr-key";
+import { Toast } from "@/common/components/ui/sonner";
+import { SWR_KEY } from "@/common/constants/swr-key";
 
 export default function Page() {
   const { trigger, isMutating } = useSWRMutation(

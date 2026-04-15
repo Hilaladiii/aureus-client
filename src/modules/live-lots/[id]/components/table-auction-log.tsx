@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/common/components/ui/table";
 
 export default function TableAuctionLog() {
   return (

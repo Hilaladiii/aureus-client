@@ -14,7 +14,7 @@ import {
   Loader2Icon,
   XCircleIcon,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();
@@ -55,7 +55,7 @@ interface Props {
 }
 function Toast({ message, type, options }: Props) {
   const baseStyle =
-    "font-mono flex gap-2 items-center border border-secondary40 py-3 px-5";
+    "uppercase text-sm tracking-tight font-medium flex gap-3 items-center bg-white border border-gray-900 py-3 px-5 rounded-none shadow-none text-gray-900";
   if (type === "success")
     return toast.success(message, {
       className: cn(baseStyle),

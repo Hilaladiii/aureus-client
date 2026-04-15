@@ -5,11 +5,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/common/components/ui/table";
 import AuctionItem from "./auction-item";
 import HighestBid from "./highest-bid";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/common/components/ui/badge";
+import { Button } from "@/common/components/ui/button";
 import { EllipsisVertical } from "lucide-react";
 
 export default function TableManageAuction() {

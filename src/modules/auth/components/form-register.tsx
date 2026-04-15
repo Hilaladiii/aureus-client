@@ -2,11 +2,11 @@ import { Controller, useForm } from "react-hook-form";
 import FormLayout from "./form-layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterForm, registerSchema } from "../schema";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { Field, FieldError, FieldLabel } from "@/common/components/ui/field";
+import { Input } from "@/common/components/ui/input";
+import { Button } from "@/common/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/common/components/ui/radio-group";
+import { Label } from "@/common/components/ui/label";
 
 interface Props {
   onSubmit: (payload: RegisterForm) => void;

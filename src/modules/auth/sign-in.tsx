@@ -3,10 +3,10 @@
 import useSWRMutation from "swr/mutation";
 import FormSignIn from "./components/form-sign-in";
 import { signIn } from "@/services/auth";
-import { Toast } from "@/components/ui/sonner";
+import { Toast } from "@/common/components/ui/sonner";
 import { useRouter } from "next/navigation";
 import { mutate } from "swr";
-import { SWR_KEY } from "@/constants/swr-key";
+import { SWR_KEY } from "@/common/constants/swr-key";
 
 export default function Page() {
   const { push } = useRouter();

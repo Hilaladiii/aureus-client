@@ -1,5 +1,5 @@
-import { appFetch } from "@/lib/fetch";
-import { TResponseData } from "@/types/response";
+import { appFetch } from "@/common/lib/fetch";
+import { TResponseData } from "@/common/types/response";
 import { TUser } from "./type";
 
 export async function getMe(url: string) {

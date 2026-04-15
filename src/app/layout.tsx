@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import AppShell from "@/components/layouts/app-shell";
+import AppShell from "@/common/components/layouts/app-shell";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",

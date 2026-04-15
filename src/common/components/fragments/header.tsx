@@ -8,7 +8,7 @@ import { getMe } from "@/services/user";
 import useSWRMutation from "swr/mutation";
 import { signOut } from "@/services/auth";
 import { Toast } from "../ui/sonner";
-import { SWR_KEY } from "@/constants/swr-key";
+import { SWR_KEY } from "@/common/constants/swr-key";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
 const navLink = [
@@ -29,8 +29,14 @@ const navLink = [
     href: "/",
   },
   {
+    title: "MY_AUCTIONS",
+    href: "/my-auctions",
+    permissions: ["SELLER"],
+  },
+  {
     title: "WALLET",
     href: "/wallet",
+    permissions: ["SELLER", "BIDDER"],
   },
 ];
 
@@ -47,6 +53,7 @@ export default function Header() {
   });
   const { trigger } = useSWRMutation(SWR_KEY.AUTH.SIGN_OUT, signOut);
   const user = data?.data;
+  console.log(user);
 
   const handleSignOut = () => {
     trigger(null, {
@@ -71,7 +78,15 @@ export default function Header() {
       </Link>
       <nav className="text-secondary40 text-sm font-medium flex gap-4">
         {navLink.map((nav) => (
-          <Link href={nav.href} key={nav.title} className="hover:underline">
+          <Link
+            href={nav.href as any}
+            key={nav.title}
+            className="hover:underline"
+            hidden={
+              Array.isArray(nav.permissions) &&
+              !nav.permissions.includes(user?.role!)
+            }
+          >
             {nav.title}
           </Link>
         ))}
@@ -87,25 +102,32 @@ export default function Header() {
 
             <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 origin-top-right">
               <div className="p-4 border-b border-gray-100">
-                <p className="text-sm font-semibold text-gray-900 truncate">
+                <p className="text-sm font-semibold text-gray-900 truncate uppercase mb-1">
                   {user.username}
                 </p>
-                <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                <p className="text-xs text-gray-500 truncate font-mono">
+                  {user.email}
+                </p>
               </div>
 
               <div className="flex flex-col">
-                <Link
-                  href="/profile"
-                  className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                  Profile
+                <Link href="/">
+                  <Button
+                    variant="ghost"
+                    className="w-full text-xs text-left"
+                    size="lg"
+                  >
+                    PROFILE
+                  </Button>
                 </Link>
-                <button
+                <Button
                   onClick={handleSignOut}
-                  className="px-4 py-3 text-sm text-left text-red-600 hover:bg-red-50 transition-colors border-t border-gray-100"
+                  variant="ghost"
+                  className="text-xs text-left"
+                  size="lg"
                 >
-                  Sign Out
-                </button>
+                  SIGN OUT
+                </Button>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import LandingImg from "@/assets/landing.jpg";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 const galleryItems = [
   { id: 1, src: LandingImg, alt: "Primary Angle" },

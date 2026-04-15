@@ -2,9 +2,9 @@ import { Controller, useForm } from "react-hook-form";
 import FormLayout from "./form-layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInForm, signInSchema } from "../schema";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/common/components/ui/field";
+import { Input } from "@/common/components/ui/input";
+import { Button } from "@/common/components/ui/button";
 
 interface Props {
   onSubmit: (payload: SignInForm) => void;

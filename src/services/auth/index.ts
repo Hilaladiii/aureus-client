@@ -1,6 +1,6 @@
-import { TResponseData } from "@/types/response";
+import { TResponseData } from "@/common/types/response";
 import { TRegisterRequest, TSignInRequest } from "./type";
-import { appFetch } from "@/lib/fetch";
+import { appFetch } from "@/common/lib/fetch";
 
 export async function signIn(url: string, { arg }: { arg: TSignInRequest }) {
   const data = await appFetch<TResponseData<null>>({

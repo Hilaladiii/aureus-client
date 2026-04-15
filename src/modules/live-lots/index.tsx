@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/common/components/ui/button";
 import CardLot from "../landing/components/card-lot";
-import PageLayout from "@/components/layouts/page-layout";
+import PageLayout from "@/common/components/layouts/page-layout";
 
 export default function Page() {
   return (
