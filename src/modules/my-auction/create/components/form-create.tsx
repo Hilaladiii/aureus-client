@@ -27,7 +27,8 @@ interface Props {
 }
 
 export default function FormCreateAuction({ onSubmit }: Props) {
-  const [categorySearch, setCategorySearch] = useDebounceState<string>();
+  const [categorySearch, setCategorySearch, categoryRaw] =
+    useDebounceState<string>();
 
   const { options, isLoading } = useOptions<TCategory>({
     keyFetch: SWR_KEY.CATEGORY.GET_ALL,
@@ -80,13 +81,15 @@ export default function FormCreateAuction({ onSubmit }: Props) {
               <FieldLabel htmlFor={field.name}>CATEGORY</FieldLabel>
               <Select {...field} onValueChange={field.onChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Theme" />
+                  <SelectValue placeholder="SELECT CATEGORY" />
                 </SelectTrigger>
-                <SelectContent>
-                  <Input
-                    placeholder="SEARCH"
-                    onChange={(e) => setCategorySearch(e.target.value)}
-                  />
+                <SelectContent
+                  showSearch
+                  searchValue={categoryRaw}
+                  onSearchChange={setCategorySearch}
+                  isLoading={isLoading}
+                  isEmpty={options.length === 0}
+                >
                   <SelectGroup>
                     {options.map((option) => (
                       <SelectItem key={option.value} value={option.value}>

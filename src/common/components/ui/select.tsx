@@ -60,10 +60,27 @@ function SelectTrigger({
 function SelectContent({
   className,
   children,
-  position = "item-aligned",
+  position = "popper",
   align = "center",
+  showSearch,
+  searchValue,
+  onSearchChange,
+  searchPlaceholder = "SEARCH...",
+  isLoading,
+  isEmpty,
+  loadingMessage = "SEARCHING...",
+  emptyMessage = "NO ASSETS FOUND.",
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+}: React.ComponentProps<typeof SelectPrimitive.Content> & {
+  showSearch?: boolean;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  searchPlaceholder?: string;
+  isLoading?: boolean;
+  isEmpty?: boolean;
+  loadingMessage?: React.ReactNode;
+  emptyMessage?: React.ReactNode;
+}) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -80,6 +97,21 @@ function SelectContent({
         {...props}
       >
         <SelectScrollUpButton />
+
+        {showSearch && (
+          <div className="p-2 pb-0 sticky top-0 bg-popover z-10">
+            <input
+              type="text"
+              className="flex w-full items-center border-b border-input bg-transparent px-2 py-1.5 text-sm outline-none focus-visible:border-b-ring transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder={searchPlaceholder}
+              value={searchValue || ""}
+              onChange={(e) => onSearchChange?.(e.target.value)}
+              onKeyDown={(e) => e.stopPropagation()}
+              autoComplete="off"
+            />
+          </div>
+        )}
+
         <SelectPrimitive.Viewport
           data-position={position}
           className={cn(
@@ -87,7 +119,17 @@ function SelectContent({
             position === "popper" && "",
           )}
         >
-          {children}
+          {isLoading ? (
+            <div className="py-6 text-center text-sm text-muted-foreground font-mono">
+              {loadingMessage}
+            </div>
+          ) : isEmpty ? (
+            <div className="py-6 text-center text-sm text-muted-foreground font-mono">
+              {emptyMessage}
+            </div>
+          ) : (
+            children
+          )}
         </SelectPrimitive.Viewport>
         <SelectScrollDownButton />
       </SelectPrimitive.Content>

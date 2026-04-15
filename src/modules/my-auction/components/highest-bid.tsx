@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { formatCurrency } from "@/utils/formatter";
+import { cn } from "@/common/lib/utils";
+import { formatCurrency } from "@/common/utils/formatter";
 import { useMemo } from "react";
 
 interface Props {
