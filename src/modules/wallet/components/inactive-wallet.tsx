@@ -1,6 +1,11 @@
 import { Button } from "@/common/components/ui/button";
 
-export default function InactiveWallet() {
+interface Props {
+  onActivate: () => void;
+  isLoading: boolean;
+}
+
+export default function InactiveWallet({ onActivate, isLoading }: Props) {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="max-w-xl w-full flex flex-col items-start border-l border-foreground/20 pl-8 md:pl-12 py-4">
@@ -36,8 +41,9 @@ export default function InactiveWallet() {
         <Button
           size="lg"
           className="px-10 h-14 font-mono text-sm tracking-widest font-bold"
+          onClick={onActivate}
         >
-          ACTIVATE WALLET
+          {isLoading ? "LOADING..." : "ACTIVATE WALLET"}
         </Button>
       </div>
     </div>

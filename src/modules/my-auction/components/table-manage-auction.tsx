@@ -11,8 +11,12 @@ import HighestBid from "./highest-bid";
 import { Badge } from "@/common/components/ui/badge";
 import { Button } from "@/common/components/ui/button";
 import { EllipsisVertical } from "lucide-react";
+import { TAuction } from "@/services/auction/type";
 
-export default function TableManageAuction() {
+interface Props {
+  data: TAuction[];
+}
+export default function TableManageAuction({ data }: Props) {
   return (
     <Table className="mt-10">
       <TableHeader>
@@ -35,23 +39,36 @@ export default function TableManageAuction() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="text-center font-mono text-xl">001</TableCell>
-          <TableCell className="py-5 flex items-center justify-center">
-            <AuctionItem />
-          </TableCell>
-          <TableCell className="text-center">
-            <HighestBid amount={420000} type="ACTIVE" bids={20} />
-          </TableCell>
-          <TableCell className="text-center">
-            <Badge variant="outline">ACTIVE</Badge>
-          </TableCell>
-          <TableCell className="text-center">
-            <Button size="icon" variant="ghost">
-              <EllipsisVertical />
-            </Button>
-          </TableCell>
-        </TableRow>
+        {Array.isArray(data) &&
+          data.map((auction, index) => (
+            <TableRow key={auction.id}>
+              <TableCell className="text-center font-mono text-xl">
+                00{index + 1}
+              </TableCell>
+              <TableCell className="py-5 ">
+                <AuctionItem
+                  category={auction.category.name}
+                  name={auction.name}
+                  imageUrl={auction.images[0].imageUrl}
+                />
+              </TableCell>
+              <TableCell className="text-center">
+                <HighestBid
+                  amount={auction.currentPrice}
+                  type="ACTIVE"
+                  bids={20}
+                />
+              </TableCell>
+              <TableCell className="text-center">
+                <Badge variant="outline">ACTIVE</Badge>
+              </TableCell>
+              <TableCell className="text-center">
+                <Button size="icon" variant="ghost">
+                  <EllipsisVertical />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );

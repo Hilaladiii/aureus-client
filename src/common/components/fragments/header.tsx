@@ -53,7 +53,6 @@ export default function Header() {
   });
   const { trigger } = useSWRMutation(SWR_KEY.AUTH.SIGN_OUT, signOut);
   const user = data?.data;
-  console.log(user);
 
   const handleSignOut = () => {
     trigger(null, {

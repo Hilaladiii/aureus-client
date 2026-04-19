@@ -1,9 +1,14 @@
 import Image from "next/image";
 import landingImg from "@/assets/landing.jpg";
 
-export default function AuctionItem() {
+interface Props {
+  imageUrl: string;
+  name: string;
+  category: string;
+}
+export default function AuctionItem({ imageUrl, name, category }: Props) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 w-fit ml-20">
       <div className="size-32 relative overflow-clip">
         <Image
           src={landingImg}
@@ -13,11 +18,9 @@ export default function AuctionItem() {
         />
       </div>
       <div>
-        <h1 className="text-xl font-bold uppercase font-mono">
-          Mclaren 720S superfast
-        </h1>
+        <h1 className="text-xl font-bold uppercase font-mono">{name}</h1>
         <span className="block tracking-widest text-left text-secondary40 text-xs">
-          AUTOMOTIVE // SUPERCAR
+          {category}
         </span>
       </div>
     </div>

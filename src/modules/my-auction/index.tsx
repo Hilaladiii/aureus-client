@@ -1,9 +1,16 @@
+"use client";
+
 import PageLayout from "@/common/components/layouts/page-layout";
 import { Button } from "@/common/components/ui/button";
 import Link from "next/link";
 import TableManageAuction from "./components/table-manage-auction";
+import useSWR from "swr";
+import { SWR_KEY } from "@/common/constants/swr-key";
+import { getMyAuctions } from "@/services/auction";
 
 export default function Page() {
+  const { data } = useSWR(SWR_KEY.AUCTION.MY_AUCTIONS, getMyAuctions);
+  const auctions = data?.data.items;
   return (
     <PageLayout
       title="MY AUCTION"
@@ -14,7 +21,7 @@ export default function Page() {
         </Link>
       }
     >
-      <TableManageAuction />
+      <TableManageAuction data={auctions || []} />
     </PageLayout>
   );
 }

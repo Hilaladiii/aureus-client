@@ -12,6 +12,11 @@ export const SWR_KEY = {
   },
   AUCTION: {
     CREATE: "auctions",
-    MY_AUCTIONS: "auctions/:id",
+    MY_AUCTIONS: "auctions/seller",
+  },
+  WALLET: {
+    GET_CURRENT_BALANCE: "wallets",
+    ACTIVATE: "wallets/activate",
+    TOP_UP: "wallets/top-up",
   },
 };
