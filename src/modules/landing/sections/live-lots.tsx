@@ -5,7 +5,6 @@ import CardLot from "../components/card-lot";
 import useSWR from "swr";
 import { SWR_KEY } from "@/common/constants/swr-key";
 import { getLiveAuctions } from "@/services/auction";
-import { env } from "@/common/lib/env";
 
 export default function LiveLots() {
   const { data } = useSWR(SWR_KEY.AUCTION.LIVE_AUCTION, (url) =>
@@ -23,7 +22,7 @@ export default function LiveLots() {
         </Link>
       </div>
 
-      <div className="flex flex-wrap justify-between mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 mt-10">
         {auctions.map((auction) => (
           <CardLot
             key={auction.id}
@@ -32,7 +31,7 @@ export default function LiveLots() {
             category={auction.category.name}
             currentBid={auction.currentPrice.toString()}
             endTime={auction.endTime.toString()}
-            imageUrl={`${env.NEXT_PUBLIC_STORAGE_URL}${auction.images[0].imageUrl}`}
+            imageKey={auction.images[0].key}
           />
         ))}
       </div>

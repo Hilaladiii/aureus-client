@@ -3,10 +3,11 @@ import { useCountdown } from "@/common/hooks/use-countdown";
 import Countdown from "./countdown";
 import { formatCurrency } from "@/common/utils/formatter";
 import Link from "next/link";
+import { getImageObject } from "@/common/utils/image";
 
 interface Props {
   id: string;
-  imageUrl: string;
+  imageKey: string;
   category: string;
   name: string;
   currentBid: string;
@@ -15,7 +16,7 @@ interface Props {
 
 export default function CardLot({
   id,
-  imageUrl,
+  imageKey,
   category,
   name,
   currentBid,
@@ -27,7 +28,7 @@ export default function CardLot({
       <div className="w-67 h-73 relative overflow-clip mb-2">
         <Link href={`/live-auctions/${id}`}>
           <Image
-            src={imageUrl}
+            src={getImageObject(imageKey)}
             fill
             className="object-cover object-center hover:scale-110 transition-transform duration-500 ease-in-out"
             alt="test"

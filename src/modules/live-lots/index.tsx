@@ -27,7 +27,7 @@ export default function Page() {
             category={auction.category.name}
             currentBid={auction.currentPrice.toString()}
             endTime={auction.endTime.toString()}
-            imageUrl={`${env.NEXT_PUBLIC_STORAGE_URL}${auction.images[0].imageUrl}`}
+            imageKey={auction.images[0].key}
           />
         ))}
       </div>
