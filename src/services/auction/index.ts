@@ -2,7 +2,7 @@ import { appFetch } from "@/common/lib/fetch";
 import { TRequestParams } from "@/common/types/request";
 import { TResponseData, TResponsePaginate } from "@/common/types/response";
 import { AuctionForm } from "@/modules/my-auction/create/schema";
-import { TAuction } from "./type";
+import { TAuction, TAuctionBidRequest } from "./type";
 
 export async function createAuction(
   url: string,
@@ -34,5 +34,37 @@ export async function getMyAuctions(url: string, params?: TRequestParams) {
     method: "GET",
     params,
   });
+  return data;
+}
+
+export async function getLiveAuctions(url: string, params?: TRequestParams) {
+  const data = await appFetch<TResponsePaginate<TAuction>>({
+    url,
+    method: "GET",
+    params,
+  });
+
+  return data;
+}
+
+export async function getLiveAuction(url: string) {
+  const data = await appFetch<TResponseData<TAuction>>({
+    url,
+    method: "GET",
+  });
+
+  return data;
+}
+
+export async function bidAuction(
+  url: string,
+  { arg }: { arg: TAuctionBidRequest },
+) {
+  const data = await appFetch<TResponseData<null>>({
+    url,
+    body: arg,
+    method: "POST",
+  });
+
   return data;
 }

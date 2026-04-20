@@ -1,9 +1,18 @@
 import { TCategory } from "../category/type";
 
-type TAuctionImage = {
+export type TAuctionImage = {
   id: string;
-  imageUrl: string;
+  key: string;
   createdAt: Date;
+};
+
+export type TBidder = {
+  name: string;
+  bidAmount: string;
+};
+
+export type TAuctionBidRequest = {
+  amount: number;
 };
 
 export type TAuction = {

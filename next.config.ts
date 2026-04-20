@@ -6,6 +6,17 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     serverSourceMaps: false,
+    proxyClientMaxBodySize: "10mb",
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8333",
+        pathname: "/images/**",
+      },
+    ],
   },
   typedRoutes: true,
   async rewrites() {

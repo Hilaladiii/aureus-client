@@ -1,22 +1,45 @@
 import Image from "next/image";
-import LandingImg from "@/assets/landing.jpg";
+import { useCountdown } from "@/common/hooks/use-countdown";
+import Countdown from "./countdown";
+import { formatCurrency } from "@/common/utils/formatter";
+import Link from "next/link";
 
-export default function CardLot() {
+interface Props {
+  id: string;
+  imageUrl: string;
+  category: string;
+  name: string;
+  currentBid: string;
+  endTime: string;
+}
+
+export default function CardLot({
+  id,
+  imageUrl,
+  category,
+  name,
+  currentBid,
+  endTime,
+}: Props) {
+  const timer = useCountdown(endTime);
   return (
     <div className="w-fit">
       <div className="w-67 h-73 relative overflow-clip mb-2">
-        <Image
-          src={LandingImg}
-          fill
-          className="object-cover object-center hover:scale-110 transition-transform duration-500 ease-in-out"
-          alt="test"
-        />
+        <Link href={`/live-auctions/${id}`}>
+          <Image
+            src={imageUrl}
+            fill
+            className="object-cover object-center hover:scale-110 transition-transform duration-500 ease-in-out"
+            alt="test"
+            unoptimized
+          />
+        </Link>
       </div>
       <span className="text-secondary40 text-[10px] tracking-[0.15em] uppercase">
-        Automotive // Supercar
+        {category}
       </span>
       <h1 className="font-mono text-xl font-medium tracking-tight text-foreground ">
-        Mclaren 720s
+        {name}
       </h1>
       <div className="w-full flex justify-between items-end mt-2">
         <div>
@@ -24,15 +47,10 @@ export default function CardLot() {
             Current Bid
           </span>
           <span className="text-xl font-semibold text-foreground">
-            $400,000.00
+            {formatCurrency(currentBid)}
           </span>
         </div>
-        <div className="flex items-center gap-2 px-2.5 py-1.5 border border-foreground/20 bg-foreground/5">
-          <div className="w-1.5 h-1.5 bg-red-500" />
-          <span className="font-mono text-xs font-bold tracking-widest text-foreground">
-            00:42:34
-          </span>
-        </div>
+        <Countdown time={timer} />
       </div>
     </div>
   );

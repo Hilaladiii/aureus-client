@@ -13,6 +13,10 @@ export const SWR_KEY = {
   AUCTION: {
     CREATE: "auctions",
     MY_AUCTIONS: "auctions/seller",
+    LIVE_AUCTION: "auctions",
+    DETAIL: (id: string) => `auctions/${id}`,
+    BID: (id: string) => `auctions/${id}/bid`,
+    LEADERBOARD: (id: string) => `auctions/${id}/leaderboard/stream`,
   },
   WALLET: {
     GET_CURRENT_BALANCE: "wallets",
