@@ -50,7 +50,6 @@ export default function FormIncrementBid({
           required
           type="number"
           min={currentPrice + minBid}
-          step={minBid}
           ref={inputRef}
         />
         <Button className="w-full font-bold mt-5" size="lg">
